@@ -1,0 +1,8 @@
+.allitems{
+    display: flex;
+    justify-content: space-around;
+    background-color: #F8F9FA;
+    align-items: center;
+    margin-bottom: 1%;
+    padding: 0.1%;
+}

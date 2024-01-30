@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Product Store</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/"> Product Store </a>
+        <a class="navbar-brand" href="/contact">Contact</a>
+      </div>
+    </nav>
+
+    
+
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-md-3">
+          <h5 class="text-center text-success bg-light p-2">Add Products</h5>
+          {% include "flash.html" %}
+          <div class="card p-2">
+            <form action="/create" method="post">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="productname"
+                  placeholder="Enter Product Name"
+                  required
+                />
+              </div>
+              <br />
+              <div class="form-group">
+                <label for="productDesc">Enter Product Details</label>
+                <textarea
+                  type="text"
+                  class="form-control mt-2"
+                  name="productDesc"
+                  row="5"
+                  required
+                >
+                </textarea>
+              </div>
+              <br />
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="rating"
+                  placeholder="Enter Product Rating"
+                  required
+                />
+              </div>
+              <br />
+              <div class="form-group">
+                <input
+                  type="number"
+                  class="form-control"
+                  name="stocks"
+                  placeholder="Enter Product Stocks"
+                  required
+                />
+              </div>
+              <br />
+              <div class="form-group">
+                <input
+                  type="number"
+                  class="form-control"
+                  name="price"
+                  placeholder="Enter Product Price"
+                  required
+                />
+              </div>
+              <br />
+              <button type="submit" class="btn btn-success">Add Product</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-md-9">
+          <div class = 'allitems'>
+            <h5 class="text-success bg-light">All Products</h5>
+            <form action="/search" method="post">
+              <div class="input-group">
+                <input name="searchtext" type="text" class="form-control" placeholder="search" aria-label="search" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+              </div>
+            </form>
+            
+          </div>
+          
+          <div class="card p-2">
+            <table class="table table-striped-columns table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Product id</th>
+                  <th scope="col">Product Name</th>
+                  <th scope="col">Product Description</th>
+                  <th scope="col">Ratings</th>
+                  <th scope="col">Stocks</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Edit</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+               {% for prod in products %}
+               <tr>
+                <th scope="row">{{prod.pid}}</th>
+                <td>{{prod.productName}}</td>
+                <td>{{prod.productDescription}}</td>
+                <td>{{prod.rating}}</td>
+                <td>{{prod.stocks}}</td>
+                <td>{{prod.price}}</td>
+                <td>
+                    <a href="/update/{{prod.pid}}" class="btn btn-outline-light btn-sm">Edit</a>
+
+                </td>
+                <td>
+                    <a href="/delete/{{prod.pid}}" class="btn btn-outline-light btn-sm">Delete</a>
+                </td>
+              </tr>
+               {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
