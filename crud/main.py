@@ -8,20 +8,22 @@ from flask_mail import Mail, Message
 
 
 
+
+
 local_server= True
 app = Flask(__name__)
 app.secret_key="^%$^$^^*&&FGGY9178"
-app.config['MAIL_SERVER'] = 'smtpout.secureservice.net'
+app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = ''
-app.config['MAIL_PASSWORD'] = ''
+app.config['MAIL_USERNAME'] = 'dummy.python10@gmail.com'
+app.config['MAIL_PASSWORD'] = 'tbkqmfolwjmjwnfk'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
 # database configuration
 # app.config['SQLALCHEMY_DATABASE_URI']='mysql://username:password@localhost/databasename'
-app.config['SQLALCHEMY_DATABASE_URI']='mssql+pyodbc://tap2023:tap2023@APINP-ELPTPMNRM\SQLEXPRESS/flaskcrudapp?driver=SQL Server'
+app.config['SQLALCHEMY_DATABASE_URI']='mysql://uxqj2d1bk0mzw7e2:uQJMGfBd7eKprmCBQKHB@boohiq8z5datxmfqy0zy-mysql.services.clever-cloud.com:3306/boohiq8z5datxmfqy0zy'
 db=SQLAlchemy(app)
 
 # configuration of database tables
@@ -90,7 +92,7 @@ def create():
         # query=Products(productName=pName,productDescription=pDesc,rating=pRating,stocks=pStocks,price=pPrice)
         # db.session.add(query)
         # db.session.commit()
-        sql_query=f"INSERT INTO [products] ([productName], [productDescription], [rating], [stocks], [price]) VALUES ('{pName}', '{pDesc}', '{pRating}', '{pStocks}', '{pPrice}')"
+        sql_query=f"INSERT INTO `products` (`productName`, `productDescription`, `rating`, `stocks`, `price`) VALUES ('{pName}', '{pDesc}', '{pRating}', '{pStocks}', '{pPrice}')"
         with db.engine.begin() as conn:
             conn.exec_driver_sql(sql_query)
             flash("Product is Added Successfully","success")
@@ -201,7 +203,7 @@ def contact():
         query = request.form.get('query')
         print(name, email)
         message = Message('Hello from Flask!',
-                     sender= 'chandrakiran.jinka@chubb.com',recipients=['dummy.python10@gmail.com'])
+                     sender= 'dummy.python10@gmail.com',recipients=['dummy.python10@gmail.com'])
         message.body = 'This is a test email sent from Flask!'
         try:
             mail.send(message)
@@ -226,7 +228,12 @@ def contact():
 
 
     return render_template('contact.html')
-
+@app.route('/mail')
+def send_mail():
+    msg = Message('Hello', sender = 'dummy.python0@gmail.com', recipients = ['dummy.python0@gmail.com'])
+    msg.body = "This is the email body"
+    mail.send(msg)
+    return "Sent"
 
 
 app.run(debug=True)
