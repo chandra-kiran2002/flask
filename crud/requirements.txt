@@ -4,4 +4,4 @@ flask_sqlalchemy
 SQLAlchemy
 gunicorn
 pyodbc
-pymssql
+pymysql
