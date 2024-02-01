@@ -201,12 +201,12 @@ def contact():
         email = request.form.get('email')
         number = request.form.get('number')
         query = request.form.get('query')
-        print(name, email)
         message = Message('Hello from Flask!',
-                     sender= 'dummy.python10@gmail.com',recipients=['dummy.python10@gmail.com'])
+                     sender= 'dummy.python10@gmail.com',recipients=[email])
         message.body = 'This is a test email sent from Flask!'
         try:
             mail.send(message)
+            return redirect(url_for('home'))
         except Exception as e:
             print(e)
 
