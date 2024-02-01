@@ -23,7 +23,7 @@ mail = Mail(app)
 
 # database configuration
 # app.config['SQLALCHEMY_DATABASE_URI']='mysql://username:password@localhost/databasename'
-app.config['SQLALCHEMY_DATABASE_URI']='mysql://uxqj2d1bk0mzw7e2:uQJMGfBd7eKprmCBQKHB@boohiq8z5datxmfqy0zy-mysql.services.clever-cloud.com:3306/boohiq8z5datxmfqy0zy'
+app.config['SQLALCHEMY_DATABASE_URI']='mssql+pyodbc://tap2023:tap2023@APINP-ELPTPMNRM\SQLEXPRESS/flaskcrudapp?driver=ODBC Driver 17 for SQL Server'
 db=SQLAlchemy(app)
 
 # configuration of database tables
@@ -92,7 +92,7 @@ def create():
         # query=Products(productName=pName,productDescription=pDesc,rating=pRating,stocks=pStocks,price=pPrice)
         # db.session.add(query)
         # db.session.commit()
-        sql_query=f"INSERT INTO `products` (`productName`, `productDescription`, `rating`, `stocks`, `price`) VALUES ('{pName}', '{pDesc}', '{pRating}', '{pStocks}', '{pPrice}')"
+        sql_query=f"INSERT INTO [products] ([productName], [productDescription], [rating], [stocks], [price]) VALUES ('{pName}', '{pDesc}', '{pRating}', '{pStocks}', '{pPrice}')"
         with db.engine.begin() as conn:
             conn.exec_driver_sql(sql_query)
             flash("Product is Added Successfully","success")
