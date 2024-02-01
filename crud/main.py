@@ -206,6 +206,7 @@ def contact():
         message.body = 'This is a test email sent from Flask!'
         try:
             mail.send(message)
+            flash("Mail sent successfully",'success')
             return redirect(url_for('home'))
         except Exception as e:
             print(e)
