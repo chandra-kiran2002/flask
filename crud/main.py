@@ -201,30 +201,15 @@ def contact():
         email = request.form.get('email')
         number = request.form.get('number')
         query = request.form.get('query')
-        print(name, email)
         message = Message('Hello from Flask!',
-                     sender= 'dummy.python10@gmail.com',recipients=['dummy.python10@gmail.com'])
+                     sender= 'dummy.python10@gmail.com',recipients=[email])
         message.body = 'This is a test email sent from Flask!'
         try:
             mail.send(message)
+            flash("Mail sent successfully",'success')
+            return redirect(url_for('home'))
         except Exception as e:
             print(e)
-
-        # msg = Message(
-        # subject="Hello",
-        # sender=app.config.get("MAIL_USERNAME"),
-        # recipients=["dummy.python10@gmail.com"],
-        # body="This is a test email I sent with Flask-Mail"
-        # )
-        
-        # # Create a secure SSL context
-        # context = ssl.create_default_context()
-        # context.options &= ~ssl.OP_NO_TLSv1_2
-
-        # with mail.connect() as conn:
-        #     conn.context = context
-        #     conn.send(msg)
-
 
 
     return render_template('contact.html')
