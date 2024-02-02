@@ -23,7 +23,7 @@ mail = Mail(app)
 
 # database configuration
 # app.config['SQLALCHEMY_DATABASE_URI']='mysql://username:password@localhost/databasename'
-app.config['SQLALCHEMY_DATABASE_URI']='mssql+pyodbc://tap2023:tap2023@APINP-ELPTPMNRM\SQLEXPRESS/flaskcrudapp?driver=ODBC Driver 17 for SQL Server'
+app.config['SQLALCHEMY_DATABASE_URI']='mysql://uxqj2d1bk0mzw7e2:uQJMGfBd7eKprmCBQKHB@boohiq8z5datxmfqy0zy-mysql.services.clever-cloud.com:3306/boohiq8z5datxmfqy0zy'
 db=SQLAlchemy(app)
 
 # configuration of database tables
