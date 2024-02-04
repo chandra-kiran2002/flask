@@ -92,7 +92,7 @@ def create():
         # query=Products(productName=pName,productDescription=pDesc,rating=pRating,stocks=pStocks,price=pPrice)
         # db.session.add(query)
         # db.session.commit()
-        sql_query=f"INSERT INTO [products] ([productName], [productDescription], [rating], [stocks], [price]) VALUES ('{pName}', '{pDesc}', '{pRating}', '{pStocks}', '{pPrice}')"
+        sql_query=f"INSERT INTO `products` (`productName`, `productDescription`, `rating`, `stocks`, `price`) VALUES ('{pName}', '{pDesc}', '{pRating}', '{pStocks}', '{pPrice}')"
         with db.engine.begin() as conn:
             conn.exec_driver_sql(sql_query)
             flash("Product is Added Successfully","success")
@@ -115,7 +115,7 @@ def update(id):
         # query=Products(productName=pName,productDescription=pDesc,rating=pRating,stocks=pStocks,price=pPrice)
         # db.session.add(query)
         # db.session.commit()
-        sql_query=f"UPDATE [products] SET [productName]='{pName}',[productDescription]='{pDesc}',[rating]='{pRating}',[stocks]='{pStocks}',[price]='{pPrice}' WHERE [pid]='{id}'"
+        sql_query=f"UPDATE `products` SET `productName`='{pName}',`productDescription`='{pDesc}',`rating`='{pRating}',`stocks`='{pStocks}',`price`='{pPrice}' WHERE `pid`='{id}'"
        
         with db.engine.begin() as conn:
             conn.exec_driver_sql(sql_query)
@@ -131,7 +131,7 @@ def update(id):
 @app.route("/delete/<int:id>",methods=['GET'])
 def delete(id):
     # print(id)
-    query=f"DELETE FROM [products] WHERE [pid]={id}"
+    query=f"DELETE FROM `products` WHERE `pid`={id}"
     with db.engine.begin() as conn:
         conn.exec_driver_sql(query)
         flash("Product Deleted Successfully","danger")
@@ -171,7 +171,7 @@ def search():
         text = request.form.get('searchtext')
         print(text)
         if text.isdigit():
-            sql_query=f'SELECT * FROM [PRODUCTS] WHERE [pid]= {int(text)}'
+            sql_query=f'SELECT * FROM `PRODUCTS` WHERE `pid`= {int(text)}'
             with db.engine.begin() as conn:
                 response=conn.exec_driver_sql(sql_query).all()
                 print(response)
@@ -181,7 +181,7 @@ def search():
                 else:
                     return render_template('index.html', products = response)
         else:
-            sql_query=f"SELECT * FROM [PRODUCTS] WHERE [productName] like '{text}%'"
+            sql_query=f"SELECT * FROM `PRODUCTS` WHERE `productName` like '{text}%'"
             with db.engine.begin() as conn:
                 response=conn.exec_driver_sql(sql_query).all()
                 print(response)
