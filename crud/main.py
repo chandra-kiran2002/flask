@@ -183,7 +183,7 @@ def search():
         else:
             sql_query=f"SELECT * FROM `boohiq8z5datxmfqy0zy`.`products` WHERE `productName` like '{text}%'"
             with db.engine.begin() as conn:
-                response=conn.exec_driver_sql(sql_query).all()
+                response=conn.execute(sql_query).fetchall()
                 print(response)
                 if len(response) == 0:
                     flash('No product found','info')
