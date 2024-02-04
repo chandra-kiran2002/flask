@@ -181,7 +181,7 @@ def search():
                 else:
                     return render_template('index.html', products = response)
         else:
-            sql_query=f"SELECT * FROM `products` WHERE `productName` like '{text}%'"
+            sql_query=f"SELECT * FROM `boohiq8z5datxmfqy0zy`.`products` WHERE `productName` like '{text}%'"
             with db.engine.begin() as conn:
                 response=conn.exec_driver_sql(sql_query).all()
                 print(response)
