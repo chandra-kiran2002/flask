@@ -181,9 +181,9 @@ def search():
                 else:
                     return render_template('index.html', products = response)
         else:
-            sql_query=f'SELECT * FROM products WHERE productName like "{text}%"'
+            sql_query = 'SELECT * FROM products WHERE productName LIKE :text'
             with db.engine.begin() as conn:
-                response=conn.exec_driver_sql(sql_query).all()
+                response = conn.execute(sql_query, {'text': f'{text}%'}).fetchall()
                 print(response)
                 if len(response) == 0:
                     flash('No product found','info')
